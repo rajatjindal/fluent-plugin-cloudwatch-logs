@@ -102,7 +102,7 @@ module Fluent
           log.warn "record is not hash (tag=#{tag}) (record=#{record})"
           false
         else
-          true  
+          true
         end
       }.group_by {|tag, time, record|
         log.trace "tag #{tag}, time #{tag}, record #{record}"
@@ -138,6 +138,11 @@ module Fluent
 
         if stream_name.nil?
           log.warn "stream_name is nil (group_name=#{group_name})"
+          next
+        end
+
+        unless group_name =~ /[\.\-_\/#A-Za-z0-9]+/
+          log.warn "(log_group_name=#{group_name} does not match required regex"
           next
         end
 
