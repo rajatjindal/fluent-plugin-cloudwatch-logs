@@ -98,8 +98,11 @@ module Fluent
         if record.nil?
           log.warn "record is nil (tag=#{tag})"
           false
+        elsif !record.is_a?(Hash)
+          log.warn "record is not hash (tag=#{tag}) (record=#{record})"
+          false
         else
-          true
+          true  
         end
       }.group_by {|tag, time, record|
         log.trace "tag #{tag}, time #{tag}, record #{record}"
