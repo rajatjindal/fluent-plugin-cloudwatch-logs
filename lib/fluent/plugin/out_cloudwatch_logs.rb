@@ -102,6 +102,7 @@ module Fluent
           true
         end
       }.group_by {|tag, time, record|
+        log.trace "tag #{tag}, time #{tag}, record #{record}"
         group = case
                 when @use_tag_as_group
                   tag
